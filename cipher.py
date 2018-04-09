@@ -2,6 +2,10 @@ import sys
 from DES import DESinterface
 from AES import AESinterface
 
+if len(sys.argv) != 6:
+    print "Too little, or too many arguments"
+    sys.exit()
+    
 cipherName = sys.argv[1]
 key = sys.argv[2]
 encDec = sys.argv[3]
@@ -10,8 +14,6 @@ output = sys.argv[5]
 
 input = open(input, 'r')
 output = open(output, 'r+')
-
-print len(sys.argv)
 
 #learn dictionaries
 def Main():
