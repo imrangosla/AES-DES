@@ -1,10 +1,15 @@
 from Crypto.Cipher import DES
+import sys
 
 class DESinterface:
     @staticmethod
     def setKey(key):
-        global des
-        des = DES.new(key, DES.MODE_ECB)
+        if (all(ord(c) < 128 for c in key)) and (len(key) == 8):
+            global des
+            des = DES.new(key, DES.MODE_ECB)
+        else:
+            print "Wrong Key"
+            sys.exit()
 
     @staticmethod
     def encrypt(plainText):
