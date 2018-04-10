@@ -4,7 +4,9 @@ import sys
 class DESinterface:
     @staticmethod
     def setKey(key):
-        if (all(ord(c) < 128 for c in key)) and (len(key) == 8):
+        if (all(ord(c) < 128 for c in key)) and (len(key) == 16):
+            key = key.decode("hex")
+            print key
             global des
             des = DES.new(key, DES.MODE_ECB)
         else:
@@ -13,11 +15,20 @@ class DESinterface:
 
     @staticmethod
     def encrypt(plainText):
+        cipherText = ""
         plainText = plainText.rstrip()
-        while (len(plainText) % 8) != 0:
-            plainText += '*'
-        return des.encrypt(plainText)
+        blocks=[plainText[x:x+8] for x in range(0,len(plainText),8)]
+        for elements in range(len(blocks)):
+            while (len(blocks[elements]) % 8) != 0:
+                blocks[elements] += '*'
+            cipherText += des.encrypt(blocks[elements])
+        return cipherText
 
     @staticmethod
     def decrypt(cipherText):
-        return des.decrypt(cipherText)
+        plainText = ""
+        cipherText = cipherText.rstrip()
+        blocks=[cipherText[x:x+8] for x in range(0,len(cipherText),8)]
+        for elements in range(len(blocks)):
+            plainText += des.decrypt(blocks[elements])
+        return plainText

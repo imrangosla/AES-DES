@@ -13,11 +13,20 @@ class AESinterface:
 
     @staticmethod
     def encrypt(plainText):
+        cipherText = ""
         plainText = plainText.rstrip()
-        while (len(plainText) % 16) != 0:
-            plainText += '*'
-        return aes.encrypt(plainText)
+        blocks=[plainText[x:x+16] for x in range(0,len(plainText),16)]
+        for elements in range(len(blocks)):
+            while (len(blocks[elements]) % 16) != 0:
+                blocks[elements] += '*'
+            cipherText += aes.encrypt(blocks[elements])
+        return cipherText
 
     @staticmethod
     def decrypt(cipherText):
-        return aes.decrypt(cipherText)
+        plainText = ""
+        cipherText = cipherText.rstrip()
+        blocks=[cipherText[x:x+16] for x in range(0,len(cipherText),16)]
+        for elements in range(len(blocks)):
+            plainText += aes.decrypt(blocks[elements])
+        return plainText
