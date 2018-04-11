@@ -11,23 +11,24 @@ Programming Language: Python
 How to execute our program:
 
 	python cipher.py <CIPHER NAME> <KEY> <ENC/DEC> <INPUT FILE> <OUTPUT FILE>
-	
+
 	  where:
 		<CIPHER NAME> = {DES,AES} # the name of the cipher
 		<KEY> = {
 			DES: 16 characters representing a 64-bit hexadecimal number
-            AES: 32 characters represneting a 128-bit hexadecimal number
+      AES: 32 characters representing a 128-bit hexadecimal number
+			No Quotes around key
 		} # the encryption key to use
 		<ENC/DEC> = {ENC, DEC} # whether to encrypt or decrypt, respectively
 		<INPUT FILE> = the file from which to read the input
 		<OUTPUT FILE> = the file to which the output shall be written
-		
+
 	  examples:
-	
+
 		DES
 		python cipher.py DES 0123456789abcdef ENC input.txt output.txt
-		
+
 		AES
-		python cipher.py AES 0123456789abcdefghijklmnopqrstuv DEC input.txt output.txt
-		
+		python cipher.py AES 0123456789abcdef0123456789abcdef DEC input.txt output.txt
+
 Extra Credit:

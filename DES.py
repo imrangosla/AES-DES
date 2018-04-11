@@ -21,6 +21,7 @@ class DESinterface:
             while (len(blocks[elements]) % 8) != 0:
                 blocks[elements] += '*'
             cipherText += des.encrypt(blocks[elements])
+            isinstance(cipherText, str)
         return cipherText.rstrip()
 
     @staticmethod
