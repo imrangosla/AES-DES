@@ -4,7 +4,8 @@ import sys
 class AESinterface:
     @staticmethod
     def setKey(key):
-        if (all(ord(c) < 128 for c in key)) and (len(key) == 16):
+        if (all(ord(c) < 128 for c in key)) and (len(key) == 32):
+            key = key.decode("hex")
             global aes
             aes = AES.new(key, AES.MODE_ECB)
         else:
@@ -20,7 +21,7 @@ class AESinterface:
             while (len(blocks[elements]) % 16) != 0:
                 blocks[elements] += '*'
             cipherText += aes.encrypt(blocks[elements])
-        return cipherText
+        return cipherText.rstrip()
 
     @staticmethod
     def decrypt(cipherText):
@@ -29,4 +30,4 @@ class AESinterface:
         blocks=[cipherText[x:x+16] for x in range(0,len(cipherText),16)]
         for elements in range(len(blocks)):
             plainText += aes.decrypt(blocks[elements])
-        return plainText
+        return plainText.rstrip()
