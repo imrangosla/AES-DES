@@ -15,12 +15,17 @@ class AESinterface:
     @staticmethod
     def encrypt(plainText):
         cipherText = ""
+        pad = 0
+        padBlock = ""
         plainText = plainText.rstrip()
         blocks=[plainText[x:x+16] for x in range(0,len(plainText),16)]
         for elements in range(len(blocks)):
             while (len(blocks[elements]) % 16) != 0:
                 blocks[elements] += '*'
+                pad +=1
             cipherText += aes.encrypt(blocks[elements])
+        cipherText += aes.encrypt(pad.zfill(8))
+        print cipherText
         return cipherText.rstrip()
 
     @staticmethod
