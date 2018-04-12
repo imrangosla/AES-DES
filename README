@@ -16,7 +16,7 @@ How to execute our program:
 		<CIPHER NAME> = {DES,AES} # the name of the cipher
 		<KEY> = {
 			DES: 16 characters representing a 64-bit hexadecimal number
-            AES: 32 characters represneting a 128-bit hexadecimal number
+            AES: 32 characters representing a 128-bit hexadecimal number
 		} # the encryption key to use
 		<ENC/DEC> = {ENC, DEC} # whether to encrypt or decrypt, respectively
 		<INPUT FILE> = the file from which to read the input
@@ -28,6 +28,6 @@ How to execute our program:
 		python cipher.py DES 0123456789abcdef ENC input.txt output.txt
 		
 		AES
-		python cipher.py AES 0123456789abcdefghijklmnopqrstuv DEC input.txt output.txt
+		python cipher.py AES 0123456789abcdef0123456789abcdef DEC input.txt output.txt
 		
 Extra Credit:
