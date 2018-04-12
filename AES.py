@@ -24,8 +24,8 @@ class AESinterface:
                 blocks[elements] += '*'
                 pad +=1
             cipherText += aes.encrypt(blocks[elements])
-        cipherText += aes.encrypt(pad.zfill(8))
-        print cipherText
+        cipherText += aes.encrypt(str(pad).zfill(16))
+        print str(pad).zfill(16)
         return cipherText.rstrip()
 
     @staticmethod
@@ -34,5 +34,8 @@ class AESinterface:
         cipherText = cipherText.rstrip()
         blocks=[cipherText[x:x+16] for x in range(0,len(cipherText),16)]
         for elements in range(len(blocks)):
-            plainText += aes.decrypt(blocks[elements])
-        return plainText.rstrip()
+            if elements == (len(blocks) - 1):
+                pad = aes.decrypt(blocks[elements])
+            else:
+                plainText += aes.decrypt(blocks[elements])
+        return plainText[:-int(pad)].rstrip()

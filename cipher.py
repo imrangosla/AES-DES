@@ -5,7 +5,7 @@ from AES import AESinterface
 if len(sys.argv) != 6:
     print "Too little, or too many arguments"
     sys.exit()
-    
+
 cipherName = sys.argv[1]
 key = sys.argv[2]
 encDec = sys.argv[3]
