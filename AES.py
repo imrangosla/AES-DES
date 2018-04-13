@@ -31,6 +31,7 @@ class AESinterface:
     @staticmethod
     def decrypt(cipherText):
         plainText = ""
+        pad = 0
         cipherText = cipherText.rstrip()
         blocks=[cipherText[x:x+16] for x in range(0,len(cipherText),16)]
         for elements in range(len(blocks)):
@@ -38,4 +39,8 @@ class AESinterface:
                 pad = aes.decrypt(blocks[elements])
             else:
                 plainText += aes.decrypt(blocks[elements])
-        return plainText[:-int(pad)].rstrip()
+        if int(pad) == 0:
+            return plainText.rstrip()
+        else:
+            return plainText[:-int(pad)].rstrip()
+
