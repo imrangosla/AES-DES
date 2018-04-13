@@ -39,4 +39,8 @@ class DESinterface:
                 pad = des.decrypt(blocks[elements])
             else:
                 plainText += des.decrypt(blocks[elements])
-        return plainText[:-int(pad)].rstrip()
+        if int(pad) == 0:
+            return plainText.rstrip()
+        else:
+            return plainText[:-int(pad)].rstrip()
+
